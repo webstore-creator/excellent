@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ExcellentSMP</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  margin: 0;
+  background: #050905;
+  background-image: radial-gradient(circle at center, #0b1f0b, #000 70%), repeating-linear-gradient(90deg, rgba(0,255,0,0.05) 0 2px, transparent 2px 40px), repeating-linear-gradient(0deg, rgba(0,255,0,0.05) 0 2px, transparent 2px 40px);
+  font-family: 'Press Start 2P', monospace;
+  color: #9aff3c;
+  text-align: center;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 2.6rem;
+  text-shadow: 0 0 8px #6cff00;
+  letter-spacing: 4px;
+}
+
+.subtitle {
+  color: #bfff7a;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.card {
+  border: 2px solid #6cff00;
+  padding: 20px;
+  margin: 25px auto;
+  max-width: 700px;
+  background: rgba(0,0,0,0.7);
+  box-shadow: 0 0 10px #3cff00;
+}
+
+button {
+  background: #6cff00;
+  border: none;
+  padding: 12px 20px;
+  color: black;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #9aff3c;
+}
+
+.rank {
+  display: inline-block;
+  width: 260px;
+  border: 2px solid #6cff00;
+  margin: 15px;
+  padding: 15px;
+  background: rgba(0,0,0,0.6);
+}
+
+.ip {
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 0.6rem;
+  opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>EXCELLENT SMP</h1>
+  <div class="subtitle">Pure Survival • Real Community • Endless Adventure</div>
+
+  <div class="card">
+    <h3>Server Status</h3>
+    <p id="status">Checking...</p>
+    <p id="players"></p>
+    <div class="ip" id="ip">excellentsmp.mineserver.uno</div>
+    <button onclick="copyIP()">COPY IP</button>
+  </div>
+
+  <div class="card">
+    <h3>Ranks</h3>
+
+    <div class="rank">
+      <h4>VIP</h4>
+      <p>/hat<br>VIP Tag<br>2 Homes</p>
+      <button>Buy VIP</button>
+    </div>
+
+    <div class="rank">
+      <h4>MVP</h4>
+      <p>All VIP perks<br>/fly in spawn<br>5 Homes</p>
+      <button>Buy MVP</button>
+    </div>
+
+    <div class="rank">
+      <h4>LEGEND</h4>
+      <p>All MVP perks<br>Custom Prefix<br>/nick</p>
+      <button>Buy LEGEND</button>
+    </div>
+  </div>
+
+  <div class="footer">© ExcellentSMP</div>
+</div>
+
+<script>
+const IP = "excellentsmp.mineserver.uno";
+
+function copyIP(){
+  navigator.clipboard.writeText(IP);
+  alert("Server IP copied!");
+}
+
+fetch(`https://api.mcsrvstat.us/2/${IP}`)
+.then(res=>res.json())
+.then(data=>{
+  if(data.online){
+    document.getElementById('status').innerText = 'Online';
+    document.getElementById('players').innerText = `${data.players.online}/${data.players.max} players`;
+  } else {
+    document.getElementById('status').innerText = 'Offline';
+  }
+})
+.catch(()=>{
+  document.getElementById('status').innerText = 'Unknown';
+});
+</script>
+
+</body>
+</html>
