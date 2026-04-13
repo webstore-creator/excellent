@@ -80,21 +80,25 @@ Price: 4.99 GEL`
 }
 
 // ================================
-// SERVER STATUS
+// SERVER STATUS FUNCTION
 // ================================
-fetch("https://api.mcsrvstat.us/3/" + ip)
-  .then(res => res.json())
-  .then(data => {
-    const el = document.getElementById("serverStatus");
-    if(!el) return;
+function checkServer(){
+  const el = document.getElementById("serverStatus");
+  el.innerHTML = "Checking server...";
 
-    if(data.online){
-      el.innerHTML = `🟢 Online • ${data.players.online}/${data.players.max} players`;
-    } else {
-      el.innerHTML = "🔴 Offline";
-    }
-  })
-  .catch(() => {
-    const el = document.getElementById("serverStatus");
-    if(el) el.innerHTML = "Unavailable";
-  });
+  fetch("https://api.mcsrvstat.us/3/" + ip)
+    .then(res => res.json())
+    .then(data => {
+      if(data.online){
+        el.innerHTML = `🟢 Online • ${data.players.online}/${data.players.max} players`;
+      } else {
+        el.innerHTML = "🔴 Offline";
+      }
+    })
+    .catch(() => {
+      el.innerHTML = "Unavailable";
+    });
+}
+
+// run once on page load
+checkServer();
