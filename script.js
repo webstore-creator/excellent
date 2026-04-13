@@ -86,11 +86,14 @@ function checkServer(){
   const el = document.getElementById("serverStatus");
   el.innerHTML = "Checking server...";
 
-  fetch("https://api.mcsrvstat.us/3/" + ip)
+  fetch("https://api.mcstatus.io/v2/status/java/" + ip)
     .then(res => res.json())
     .then(data => {
       if(data.online){
-        el.innerHTML = `🟢 Online • ${data.players.online}/${data.players.max} players`;
+        const players = data.players.online ?? 0;
+        const max = data.players.max ?? 0;
+
+        el.innerHTML = `🟢 Online • ${players}/${max} players`;
       } else {
         el.innerHTML = "🔴 Offline";
       }
@@ -99,6 +102,3 @@ function checkServer(){
       el.innerHTML = "Unavailable";
     });
 }
-
-// run once on page load
-checkServer();
