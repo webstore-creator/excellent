@@ -29,16 +29,12 @@ button{width:100%;margin-top:10px;background:none;border:2px solid var(--green);
 button:hover{background:var(--green);color:black}
 
 .footer{text-align:center;padding:20px;opacity:.6;font-size:9px}
-
-/* ---------- Animated Pixel Cube Background ---------- */
-
 body{
   background:linear-gradient(#041104,#020402);
   overflow-x:hidden;
   position:relative;
 }
 
-/* floating pixel dots/cubes */
 body::before,
 body::after{
   content:"";
@@ -61,11 +57,6 @@ body::after{
 }
 
 @keyframes floatPixels{
-  from{
-    background-position:0 0, 0 0;
-  }
-  to{
-    background-position:0 -200px, 0 -400px;
-  }
+  from{background-position:0 0,0 0;}
+  to{background-position:0 -200px,0 -400px;}
 }
-
