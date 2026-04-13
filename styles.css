@@ -35,28 +35,39 @@ body{
   position:relative;
 }
 
+/* ===== Floating Pixel Cubes Background ===== */
+
+body{
+  background:linear-gradient(#041104,#020402);
+  overflow-x:hidden;
+  position:relative;
+}
+
 body::before,
 body::after{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
+
+  /* tiny squares instead of dots */
   background-image:
-    radial-gradient(circle, rgba(156,255,0,.7) 1px, transparent 1px),
-    radial-gradient(circle, rgba(156,255,0,.4) 1px, transparent 1px);
-  background-size: 40px 40px, 80px 80px;
-  animation: floatPixels 14s linear infinite;
-  opacity:.35;
+    linear-gradient(rgba(156,255,0,.6) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(156,255,0,.6) 2px, transparent 2px);
+
+  background-size: 40px 40px;
+  animation: floatCubes 16s linear infinite;
+  opacity:.25;
   z-index:-1;
 }
 
 body::after{
-  background-size: 60px 60px, 120px 120px;
-  animation-duration: 20s;
-  opacity:.2;
+  background-size: 60px 60px;
+  animation-duration: 24s;
+  opacity:.15;
 }
 
-@keyframes floatPixels{
-  from{background-position:0 0,0 0;}
-  to{background-position:0 -200px,0 -400px;}
+@keyframes floatCubes{
+  from { background-position:0 0; }
+  to   { background-position:0 -400px; }
 }
