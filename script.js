@@ -5,6 +5,17 @@ const webhookURL = "https://discord.com/api/webhooks/1493365597763797143/vwQHZhm
 const ip = "excellentsmp.mineserver.uno";
 
 // ================================
+// POPUP FUNCTIONS
+// ================================
+function openPopup(){
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
+// ================================
 // SEND RANK PURCHASE REQUEST
 // ================================
 function sendRequest(){
@@ -21,11 +32,19 @@ function sendRequest(){
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      content:`🛒 **Rank Request**\nDiscord: ${discord}\nMinecraft: ${mc}\nRank: ${rank}`
+      content:`🛒 **Rank Request**
+Discord: ${discord}
+Minecraft: ${mc}
+Rank: ${rank}`
     })
   })
-  .then(()=>alert("Request sent!"))
-  .catch(()=>alert("Failed to send request"));
+  .then(()=>{
+    alert("Request sent!");
+    openPopup();
+  })
+  .catch(()=>{
+    alert("Failed to send request");
+  });
 }
 
 // ================================
@@ -44,11 +63,20 @@ function sendItem(){
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      content:`⛏️ **Item Purchase Request**\nItem: Amethyst Pickaxe\nDiscord: ${discord}\nMinecraft: ${mc}\nPrice: 4.99 GEL`
+      content:`⛏️ **Item Purchase Request**
+Item: Amethyst Pickaxe
+Discord: ${discord}
+Minecraft: ${mc}
+Price: 4.99 GEL`
     })
   })
-  .then(()=>alert("Request sent!"))
-  .catch(()=>alert("Failed to send request"));
+  .then(()=>{
+    alert("Request sent!");
+    openPopup();
+  })
+  .catch(()=>{
+    alert("Failed to send request");
+  });
 }
 
 // ================================
@@ -58,7 +86,6 @@ fetch("https://api.mcsrvstat.us/3/" + ip)
   .then(res => res.json())
   .then(data => {
     const el = document.getElementById("serverStatus");
-
     if(!el) return;
 
     if(data.online){
